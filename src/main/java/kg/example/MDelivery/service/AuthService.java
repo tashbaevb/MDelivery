@@ -1,5 +1,6 @@
 package kg.example.MDelivery.service;
 
+import kg.example.MDelivery.dto.DeliveryDTO;
 import kg.example.MDelivery.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
@@ -11,9 +12,11 @@ public interface AuthService {
 
     ResponseEntity<Map<String, String>> register(UserDTO userDTO);
 
+    ResponseEntity<Map<String, String>> registerDelivery(DeliveryDTO deliveryDTO);
+
     ResponseEntity<Map<String, String>> login(UserDTO userDTO);
 
-    boolean isPresentEmail(String email);
+    ResponseEntity<Map<String, String>> login(DeliveryDTO deliveryDTO);
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     String resetPassword(String email);

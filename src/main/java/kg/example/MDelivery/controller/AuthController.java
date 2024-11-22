@@ -1,5 +1,6 @@
 package kg.example.MDelivery.controller;
 
+import kg.example.MDelivery.dto.DeliveryDTO;
 import kg.example.MDelivery.dto.UserDTO;
 import kg.example.MDelivery.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,11 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<Map<String, String>> auth(@RequestBody UserDTO userDto) {
         return authService.login(userDto);
+    }
+
+    @PostMapping("/auth/delivery")
+    public ResponseEntity<Map<String, String>> auth(@RequestBody DeliveryDTO deliveryDTO) {
+        return authService.login(deliveryDTO);
     }
 
     @GetMapping("/reset")

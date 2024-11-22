@@ -1,6 +1,6 @@
 package kg.example.MDelivery.repository;
 
-import kg.example.MDelivery.entity.User;
+import kg.example.MDelivery.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

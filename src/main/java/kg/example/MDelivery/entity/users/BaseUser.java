@@ -1,13 +1,12 @@
-package kg.example.MDelivery.entity;
+package kg.example.MDelivery.entity.users;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.MappedSuperclass;
 import kg.example.MDelivery.enums.UserRole;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,25 +17,23 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "users")
+@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public abstract class BaseUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(nullable = false)
     String email, password;
 
     String name, surname;
 
-    String telNumber;
+    String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     UserRole userRole;

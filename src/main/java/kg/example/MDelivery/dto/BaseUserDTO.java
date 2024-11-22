@@ -1,5 +1,6 @@
 package kg.example.MDelivery.dto;
 
+import kg.example.MDelivery.enums.UserRole;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,12 +8,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDTO extends BaseUserDTO {
+public abstract class BaseUserDTO {
 
-    Integer balance;
+    String email, password;
+
+    String name, surname;
+
+    String phoneNumber;
+
+    UserRole userRole;
+
+    String resetToken;
+
+    LocalDateTime resetTokenExpireTime;
 }

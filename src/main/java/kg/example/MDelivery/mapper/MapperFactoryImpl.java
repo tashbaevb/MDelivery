@@ -10,4 +10,9 @@ public class MapperFactoryImpl implements MapperFactory {
     public UserMapper createUserMapper(ModelMapper modelMapper) {
         return new UserMapper(modelMapper);
     }
+
+    @Override
+    public DeliveryMapper createDeliveryMapper(ModelMapper modelMapper) {
+        return new DeliveryMapper(modelMapper);
+    }
 }

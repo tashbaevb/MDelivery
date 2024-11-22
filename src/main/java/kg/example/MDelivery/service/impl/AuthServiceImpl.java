@@ -1,10 +1,14 @@
 package kg.example.MDelivery.service.impl;
 
+import kg.example.MDelivery.dto.DeliveryDTO;
 import kg.example.MDelivery.dto.UserDTO;
-import kg.example.MDelivery.entity.User;
+import kg.example.MDelivery.entity.users.Delivery;
+import kg.example.MDelivery.entity.users.User;
 import kg.example.MDelivery.enums.UserRole;
+import kg.example.MDelivery.mapper.DeliveryMapper;
 import kg.example.MDelivery.mapper.MapperFactory;
 import kg.example.MDelivery.mapper.UserMapper;
+import kg.example.MDelivery.repository.DeliveryRepository;
 import kg.example.MDelivery.repository.UserRepository;
 import kg.example.MDelivery.security.JwtUtil;
 import kg.example.MDelivery.service.AuthService;
@@ -35,6 +39,7 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final DeliveryRepository deliveryRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final MapperFactory mapperFactory;
@@ -48,18 +53,33 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseEntity<Map<String, String>> register(UserDTO userDTO) {
         UserMapper userMapper = mapperFactory.createUserMapper(modelMapper);
-        User user = userMapper.convertToEntity(userDTO);
-
         if (isPresentEmail(userDTO.getEmail())) {
             return ResponseEntity.badRequest().body(Collections.
                     singletonMap("error", "User with email " + userDTO.getEmail() + "already exist."));
         }
 
+        User user = userMapper.convertToEntity(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserRole(UserRole.USER_ROLE);
         userRepository.save(user);
 
         return generateAndGetTokens(userDTO);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, String>> registerDelivery(DeliveryDTO deliveryDTO) {
+        DeliveryMapper deliveryMapper = mapperFactory.createDeliveryMapper(modelMapper);
+        if (isPresentEmail(deliveryDTO.getEmail())) {
+            return ResponseEntity.badRequest().body(Collections.
+                    singletonMap("error", "Delivery/user with email " + deliveryDTO.getEmail() + "already exist."));
+        }
+
+        Delivery delivery = deliveryMapper.convertToEntity(deliveryDTO);
+        delivery.setPassword(passwordEncoder.encode(delivery.getPassword()));
+        delivery.setUserRole(UserRole.DELIVERY_ROLE);
+        deliveryRepository.save(delivery);
+
+        return generateAndGetTokens(deliveryDTO);
     }
 
     @Override
@@ -78,7 +98,21 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean isPresentEmail(String email) {
+    public ResponseEntity<Map<String, String>> login(DeliveryDTO deliveryDTO) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(deliveryDTO.getEmail(), deliveryDTO.getPassword()));
+            if (authentication.isAuthenticated()) {
+                return generateAndGetTokens(deliveryDTO);
+            } else {
+                throw new UsernameNotFoundException("Incorrect email or password.");
+            }
+        } catch (AuthenticationException ae) {
+            throw new UsernameNotFoundException("Incorrect email or password");
+        }
+    }
+
+    private boolean isPresentEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         return user.isPresent();
     }
@@ -119,6 +153,14 @@ public class AuthServiceImpl implements AuthService {
 
     private ResponseEntity<Map<String, String>> generateAndGetTokens(UserDTO userDTO) {
         String accessToken = jwtUtil.generateToken(userDTO.getEmail());
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_token", accessToken);
+        return ResponseEntity.ok(tokens);
+    }
+
+    private ResponseEntity<Map<String, String>> generateAndGetTokens(DeliveryDTO deliveryDTO) {
+        String accessToken = jwtUtil.generateToken(deliveryDTO.getEmail());
 
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", accessToken);

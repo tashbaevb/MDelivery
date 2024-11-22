@@ -1,7 +1,7 @@
 package kg.example.MDelivery.mapper;
 
 import kg.example.MDelivery.dto.UserDTO;
-import kg.example.MDelivery.entity.User;
+import kg.example.MDelivery.entity.users.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

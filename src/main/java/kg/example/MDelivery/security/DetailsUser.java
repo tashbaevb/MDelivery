@@ -1,6 +1,6 @@
 package kg.example.MDelivery.security;
 
-import kg.example.MDelivery.entity.User;
+import kg.example.MDelivery.entity.users.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +18,8 @@ public class DetailsUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(String.valueOf(user.getUserRole())));
+        String role = user.getUserRole() != null ? user.getUserRole().name() : "ROLE_USER";
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     @Override

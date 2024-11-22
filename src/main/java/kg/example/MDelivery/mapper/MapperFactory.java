@@ -5,4 +5,6 @@ import org.modelmapper.ModelMapper;
 public interface MapperFactory {
 
     UserMapper createUserMapper(ModelMapper modelMapper);
+
+    DeliveryMapper createDeliveryMapper(ModelMapper modelMapper);
 }

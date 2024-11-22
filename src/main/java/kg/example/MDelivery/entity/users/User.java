@@ -1,18 +1,24 @@
-package kg.example.MDelivery.dto;
+package kg.example.MDelivery.entity.users;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+@Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDTO extends BaseUserDTO {
+@Builder
+public class User extends BaseUser {
 
     Integer balance;
 }
