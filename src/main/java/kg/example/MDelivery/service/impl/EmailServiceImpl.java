@@ -1,6 +1,6 @@
 package kg.example.MDelivery.service.impl;
 
-import kg.example.MDelivery.service.EmailService;
+import kg.example.MDelivery.service.interfaces.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;

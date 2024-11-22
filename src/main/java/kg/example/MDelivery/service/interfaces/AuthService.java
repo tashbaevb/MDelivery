@@ -1,4 +1,4 @@
-package kg.example.MDelivery.service;
+package kg.example.MDelivery.service.interfaces;
 
 import kg.example.MDelivery.dto.DeliveryDTO;
 import kg.example.MDelivery.dto.UserDTO;

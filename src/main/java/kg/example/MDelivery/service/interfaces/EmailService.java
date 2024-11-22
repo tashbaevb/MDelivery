@@ -1,4 +1,4 @@
-package kg.example.MDelivery.service;
+package kg.example.MDelivery.service.interfaces;
 
 public interface EmailService {
 
