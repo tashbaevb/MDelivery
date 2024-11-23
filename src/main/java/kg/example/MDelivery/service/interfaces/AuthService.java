@@ -1,7 +1,7 @@
 package kg.example.MDelivery.service.interfaces;
 
-import kg.example.MDelivery.dto.DeliveryDTO;
-import kg.example.MDelivery.dto.UserDTO;
+import kg.example.MDelivery.dto.users.DeliveryDTO;
+import kg.example.MDelivery.dto.users.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;

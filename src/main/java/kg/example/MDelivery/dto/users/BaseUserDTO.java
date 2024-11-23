@@ -1,4 +1,4 @@
-package kg.example.MDelivery.dto;
+package kg.example.MDelivery.dto.users;
 
 import kg.example.MDelivery.enums.UserRole;
 import lombok.AccessLevel;

@@ -23,6 +23,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -44,6 +45,8 @@ public class Order {
     Double toX, toY;
 
     Double distanceInKm;
+
+    LocalDateTime orderTime;
 
     @ManyToOne
     @JoinColumn(name = "transport_type_id", nullable = false)

@@ -1,7 +1,7 @@
 package kg.example.MDelivery.controller;
 
-import kg.example.MDelivery.dto.DeliveryDTO;
-import kg.example.MDelivery.dto.UserDTO;
+import kg.example.MDelivery.dto.users.DeliveryDTO;
+import kg.example.MDelivery.dto.users.UserDTO;
 import kg.example.MDelivery.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

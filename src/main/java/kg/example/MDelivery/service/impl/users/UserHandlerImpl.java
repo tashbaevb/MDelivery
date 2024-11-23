@@ -1,19 +1,23 @@
-package kg.example.MDelivery.service.impl;
+package kg.example.MDelivery.service.impl.users;
 
-import kg.example.MDelivery.dto.UserDTO;
+import kg.example.MDelivery.dto.users.BaseResponseDTO;
+import kg.example.MDelivery.dto.users.UserDTO;
+import kg.example.MDelivery.dto.users.UserResponseDTO;
 import kg.example.MDelivery.entity.users.User;
 import kg.example.MDelivery.enums.UserRole;
 import kg.example.MDelivery.mapper.GenericMapper;
-import kg.example.MDelivery.repository.UserRepository;
+import kg.example.MDelivery.repository.users.UserRepository;
 import kg.example.MDelivery.security.JwtUtil;
 import kg.example.MDelivery.service.interfaces.UserHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -44,6 +48,26 @@ public class UserHandlerImpl implements UserHandler<UserDTO, User> {
     public ResponseEntity<Map<String, String>> login(UserDTO userDTO) {
         authenticate(userDTO.getEmail(), userDTO.getPassword());
         return generateTokens(userDTO.getEmail());
+    }
+
+    @Override
+    public ResponseEntity<List<? extends BaseResponseDTO>> getAll() {
+        List<User> users = userRepository.findAll();
+        List<UserResponseDTO> userResponseDTOs = users.stream()
+                .map(user -> genericMapper.toDTO(user, UserResponseDTO.class))
+                .toList();
+
+        return ResponseEntity.ok(userResponseDTOs);
+    }
+
+    @Override
+    public ResponseEntity<UserResponseDTO> myProfile(Authentication authentication) {
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        UserResponseDTO userResponseDTO = genericMapper.toDTO(user, UserResponseDTO.class);
+        return ResponseEntity.ok(userResponseDTO);
     }
 
     @Override

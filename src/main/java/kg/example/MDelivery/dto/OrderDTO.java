@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -25,6 +26,8 @@ public class OrderDTO {
 
     List<Integer> productIds;
 
+    LocalDateTime orderTime;
+
     BigDecimal totalPrice, deliveryPrice;
 
     Double toX, toY;
@@ -34,4 +37,5 @@ public class OrderDTO {
     Integer transportTypeId;
 
     OrderStatus orderStatus;
+
 }

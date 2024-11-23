@@ -1,8 +1,8 @@
 package kg.example.MDelivery.service;
 
 import kg.example.MDelivery.enums.UserRole;
-import kg.example.MDelivery.service.impl.DeliveryHandlerImpl;
-import kg.example.MDelivery.service.impl.UserHandlerImpl;
+import kg.example.MDelivery.service.impl.users.DeliveryHandlerImpl;
+import kg.example.MDelivery.service.impl.users.UserHandlerImpl;
 import kg.example.MDelivery.service.interfaces.UserHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

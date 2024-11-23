@@ -1,4 +1,4 @@
-package kg.example.MDelivery.repository;
+package kg.example.MDelivery.repository.users;
 
 import kg.example.MDelivery.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;

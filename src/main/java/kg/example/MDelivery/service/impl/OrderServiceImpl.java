@@ -9,17 +9,18 @@ import kg.example.MDelivery.entity.users.Delivery;
 import kg.example.MDelivery.entity.users.User;
 import kg.example.MDelivery.enums.OrderStatus;
 import kg.example.MDelivery.mapper.GenericMapper;
-import kg.example.MDelivery.repository.DeliveryRepository;
+import kg.example.MDelivery.repository.users.DeliveryRepository;
 import kg.example.MDelivery.repository.OrderRepository;
 import kg.example.MDelivery.repository.ProductRepository;
 import kg.example.MDelivery.repository.TransportTypeRepository;
-import kg.example.MDelivery.repository.UserRepository;
+import kg.example.MDelivery.repository.users.UserRepository;
 import kg.example.MDelivery.service.interfaces.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalPrice(totalPrice);
         order.setDeliveryPrice(deliveryPrice);
         order.setOrderStatus(OrderStatus.PROCESSING);
+        order.setOrderTime(LocalDateTime.now());
         order.setUser(user);
 
         Order savedOrder = orderRepository.save(order);

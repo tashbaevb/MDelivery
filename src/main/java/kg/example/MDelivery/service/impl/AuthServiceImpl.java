@@ -1,7 +1,7 @@
 package kg.example.MDelivery.service.impl;
 
-import kg.example.MDelivery.dto.DeliveryDTO;
-import kg.example.MDelivery.dto.UserDTO;
+import kg.example.MDelivery.dto.users.DeliveryDTO;
+import kg.example.MDelivery.dto.users.UserDTO;
 import kg.example.MDelivery.entity.users.Delivery;
 import kg.example.MDelivery.entity.users.User;
 import kg.example.MDelivery.enums.UserRole;

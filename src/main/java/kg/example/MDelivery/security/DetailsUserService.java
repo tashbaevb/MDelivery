@@ -2,8 +2,8 @@ package kg.example.MDelivery.security;
 
 import kg.example.MDelivery.entity.users.Delivery;
 import kg.example.MDelivery.entity.users.User;
-import kg.example.MDelivery.repository.DeliveryRepository;
-import kg.example.MDelivery.repository.UserRepository;
+import kg.example.MDelivery.repository.users.DeliveryRepository;
+import kg.example.MDelivery.repository.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

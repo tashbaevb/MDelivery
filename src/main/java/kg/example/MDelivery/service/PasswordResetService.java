@@ -1,7 +1,7 @@
 package kg.example.MDelivery.service;
 
 import kg.example.MDelivery.entity.users.User;
-import kg.example.MDelivery.repository.UserRepository;
+import kg.example.MDelivery.repository.users.UserRepository;
 import kg.example.MDelivery.service.interfaces.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
