@@ -65,14 +65,17 @@ git clone https://github.com/your-username/mdelivery.git
 cd mdelivery
 ```
 
+#### 2. Create database
 ```sql
 CREATE DATABASE mdelivery;
 ```
 
+#### 3. Build the project
 ```bash
 mvn clean install
 ```
 
+#### 4. Run the project
 ```bash
 java -jar target/mdelivery-0.0.1-SNAPSHOT.jar
 ```
