@@ -63,12 +63,16 @@
 ```bash
 git clone https://github.com/your-username/mdelivery.git
 cd mdelivery
+```
 
 ```sql
 CREATE DATABASE mdelivery;
+```
 
 ```bash
 mvn clean install
+```
 
 ```bash
 java -jar target/mdelivery-0.0.1-SNAPSHOT.jar
+```
