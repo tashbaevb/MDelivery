@@ -56,7 +56,7 @@
    cd mdelivery
 ```
 
-```sql
+```plpgsql
 CREATE DATABASE mdelivery;
 ```
 
