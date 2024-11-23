@@ -9,6 +9,9 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Entity
+@AllArgsConstructor
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Delivery extends BaseUser {
 

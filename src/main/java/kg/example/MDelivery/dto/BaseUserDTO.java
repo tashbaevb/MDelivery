@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class BaseUserDTO {
 
+    Integer id;
+
     String email, password;
 
     String name, surname;

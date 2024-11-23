@@ -31,6 +31,6 @@ public class Product {
 
     Double price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderProduct> orderProducts;
 }

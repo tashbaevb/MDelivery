@@ -1,5 +1,6 @@
 package kg.example.MDelivery.security;
 
+import kg.example.MDelivery.entity.users.BaseUser;
 import kg.example.MDelivery.entity.users.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +15,22 @@ import java.util.Collections;
 @Getter
 public class DetailsUser implements UserDetails {
 
-    private final User user;
+    private final BaseUser baseUser;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String role = user.getUserRole() != null ? user.getUserRole().name() : "ROLE_USER";
+        String role = baseUser.getUserRole() != null ? baseUser.getUserRole().name() : "USER_ROLE";
         return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return baseUser.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return baseUser.getEmail();
     }
 
     @Override

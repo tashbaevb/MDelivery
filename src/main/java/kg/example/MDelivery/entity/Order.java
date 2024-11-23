@@ -8,7 +8,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import kg.example.MDelivery.entity.users.Delivery;
+import kg.example.MDelivery.entity.users.User;
 import kg.example.MDelivery.enums.OrderStatus;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -35,11 +41,25 @@ public class Order {
     BigDecimal totalPrice, deliveryPrice;
 
     @Column(nullable = false)
-    Double fromX, fromY, toX, toY;
+    Double toX, toY;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    Double distanceInKm;
+
+    @ManyToOne
+    @JoinColumn(name = "transport_type_id", nullable = false)
+    TransportType transportType;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderProduct> orderProducts;
 
     @Enumerated(EnumType.STRING)
     OrderStatus orderStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
+
+    @ManyToOne
+    @JoinColumn(name = "delivery_id")
+    Delivery delivery;
 }
